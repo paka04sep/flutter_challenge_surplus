@@ -2,6 +2,7 @@ import 'package:flutter_challenge/model/offer_model.dart';
 import 'package:flutter_challenge/repository/offer_repo.dart';
 import 'package:flutter_challenge/service/the_exceptions.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum OfferFilter { all, bakery, cafe, market }
 
@@ -13,20 +14,66 @@ class HomeScreenController extends GetxController {
   final RxList<OfferModel> _offers = <OfferModel>[].obs;
   final Rx<OfferFilter> _activeFilter = OfferFilter.all.obs;
   final RxString _searchQuery = ''.obs;
+  final RxBool _showFavoritesOnly = false.obs;
 
   bool get isLoading => _isLoading.value;
   bool get hasError => _hasError.value;
   List<OfferModel> get offers => _offers;
   OfferFilter get activeFilter => _activeFilter.value;
   String get searchQuery => _searchQuery.value;
+  bool get showFavoritesOnly => _showFavoritesOnly.value;
 
-  /// INTENTIONAL GAP (Task A1): filter + search not applied — returns all offers.
-  List<OfferModel> get visibleOffers => _offers;
+  List<OfferModel> get visibleOffers {
+    final query = _searchQuery.value.trim().toLowerCase();
+    final filter = _activeFilter.value;
+    final showFavs = _showFavoritesOnly.value;
+
+    return _offers.where((offer) {
+      // 1. Favorites Screen-Level Filter
+      if (showFavs && !offer.isFavorite) {
+        return false;
+      }
+
+      // 2. Category Filter
+      if (filter != OfferFilter.all &&
+          offer.category.toLowerCase() != filter.name.toLowerCase()) {
+        return false;
+      }
+
+      // 3. Search Query Filter
+      final matchesSearch = query.isEmpty ||
+          offer.title.toLowerCase().contains(query) ||
+          offer.storeName.toLowerCase().contains(query);
+      return matchesSearch;
+    }).toList();
+  }
 
   @override
   void onInit() {
     super.onInit();
+    _loadPersistedStates();
     fetchOffers();
+  }
+
+  void _loadPersistedStates() {
+    try {
+      final prefs = Get.find<SharedPreferences>();
+      
+      // Load active category filter
+      final storedFilter = prefs.getString('home_active_filter');
+      if (storedFilter != null) {
+        _activeFilter.value = OfferFilter.values.firstWhere(
+          (e) => e.name == storedFilter,
+          orElse: () => OfferFilter.all,
+        );
+      }
+      
+      // Load show favorites only state
+      final storedFavs = prefs.getBool('home_show_favorites_only');
+      if (storedFavs != null) {
+        _showFavoritesOnly.value = storedFavs;
+      }
+    } catch (_) {}
   }
 
   Future<void> fetchOffers() async {
@@ -45,19 +92,32 @@ class HomeScreenController extends GetxController {
 
   void setFilter(OfferFilter filter) {
     _activeFilter.value = filter;
-    // INTENTIONAL GAP (Task A1): candidate should refresh visibleOffers.
+    try {
+      final prefs = Get.find<SharedPreferences>();
+      prefs.setString('home_active_filter', filter.name);
+    } catch (_) {}
+  }
+
+  void toggleShowFavoritesOnly() {
+    _showFavoritesOnly.value = !_showFavoritesOnly.value;
+    try {
+      final prefs = Get.find<SharedPreferences>();
+      prefs.setBool('home_show_favorites_only', _showFavoritesOnly.value);
+    } catch (_) {}
   }
 
   void setSearchQuery(String value) {
     _searchQuery.value = value;
-    // INTENTIONAL GAP (Task A1): candidate should refresh visibleOffers.
   }
 
   Future<void> toggleFavorite(String offerId) async {
     await _offerRepo.toggleFavorite(offerId);
-    // INTENTIONAL GAP (Task B2): list does not update after toggle.
+    final index = _offers.indexWhere((offer) => offer.id == offerId);
+    if (index >= 0) {
+      final currentOffer = _offers[index];
+      _offers[index] = currentOffer.copyWith(isFavorite: !currentOffer.isFavorite);
+    }
   }
 
-  /// INTENTIONAL GAP (Task A3): pull-to-refresh not wired in UI — candidate connects this.
   Future<void> onRefresh() => fetchOffers();
 }
