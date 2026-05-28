@@ -29,11 +29,17 @@ class CartRepo extends GetxService {
     final items = await loadCart();
     final index = items.indexWhere((item) => item.offer.id == offer.id);
     if (index >= 0) {
+      final newQuantity = items[index].quantity + quantity;
+      final maxQuantity = items[index].offer.quantityLeft;
       items[index] = items[index].copyWith(
-        quantity: items[index].quantity + quantity,
+        quantity: newQuantity > maxQuantity ? maxQuantity : newQuantity,
       );
     } else {
-      items.add(CartItemModel(offer: offer, quantity: quantity));
+      final maxQuantity = offer.quantityLeft;
+      items.add(CartItemModel(
+        offer: offer,
+        quantity: quantity > maxQuantity ? maxQuantity : quantity,
+      ));
     }
     await saveCart(items);
   }
@@ -47,7 +53,10 @@ class CartRepo extends GetxService {
     if (quantity <= 0) {
       items.removeAt(index);
     } else {
-      items[index] = items[index].copyWith(quantity: quantity);
+      final maxQuantity = items[index].offer.quantityLeft;
+      items[index] = items[index].copyWith(
+        quantity: quantity > maxQuantity ? maxQuantity : quantity,
+      );
     }
     await saveCart(items);
   }

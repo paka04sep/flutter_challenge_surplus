@@ -20,5 +20,12 @@
   "filter_all": "ทั้งหมด",
   "filter_bakery": "เบเกอรี่",
   "filter_cafe": "คาเฟ่",
-  "filter_market": "ตลาด"
+  "filter_market": "ตลาด",
+  "added_to_bag": "เพิ่มสินค้าลงถุงสำเร็จแล้ว!",
+  "cannot_exceed_stock": "ไม่สามารถเพิ่มสินค้าเกินจำนวนที่มีอยู่ในสต็อกได้",
+  "pickup": "เวลารับสินค้า",
+  "empty_favorites": "ยังไม่มีรายการโปรดของคุณนะ",
+  "nav_home": "หน้าแรก",
+  "nav_bag": "ถุงกู้ชีพ",
+  "nav_profile": "โปรไฟล์"
 }

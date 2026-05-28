@@ -16,7 +16,8 @@ class CartScreen extends GetView<CartScreenController> {
     return MainShell(
       currentIndex: 1,
       child: Scaffold(
-        appBar: AppBar(title: Text('cart_title'.tr, style: Styles.boldText18())),
+        appBar:
+            AppBar(title: Text('cart_title'.tr, style: Styles.boldText18())),
         body: Obx(() {
           if (controller.isEmpty) {
             return Center(
@@ -39,7 +40,8 @@ class CartScreen extends GetView<CartScreenController> {
                           height: 56.h,
                           width: 56.w,
                         ),
-                        title: Text(item.offer.title, style: Styles.mediumText16()),
+                        title: Text(item.offer.title,
+                            style: Styles.mediumText16()),
                         subtitle: Text(
                           '฿${item.offer.discountedPrice} × ${item.quantity}',
                           style: Styles.regularText14(),
@@ -49,18 +51,24 @@ class CartScreen extends GetView<CartScreenController> {
                           children: [
                             IconButton(
                               icon: const Icon(Icons.remove_circle_outline),
+                              color: AppColors.primary,
                               onPressed: () => controller.updateQuantity(
                                 item.offer.id,
                                 item.quantity - 1,
                               ),
                             ),
-                            Text('${item.quantity}', style: Styles.mediumText16()),
+                            Text('${item.quantity}',
+                                style: Styles.mediumText16()),
                             IconButton(
                               icon: const Icon(Icons.add_circle_outline),
-                              onPressed: () => controller.updateQuantity(
-                                item.offer.id,
-                                item.quantity + 1,
-                              ),
+                              color: AppColors.primary,
+                              disabledColor: Colors.grey.shade400,
+                              onPressed: item.quantity < item.offer.quantityLeft
+                                  ? () => controller.updateQuantity(
+                                        item.offer.id,
+                                        item.quantity + 1,
+                                      )
+                                  : null,
                             ),
                           ],
                         ),
@@ -102,7 +110,7 @@ class CartScreen extends GetView<CartScreenController> {
           TheButton(
             label: 'checkout'.tr,
             onPressed: () {
-              Get.snackbar('checkout', 'Mock checkout — not part of challenge');
+              Get.snackbar('Checkout', 'Not implement yet');
             },
           ),
         ],

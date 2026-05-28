@@ -20,5 +20,12 @@
   "filter_all": "All",
   "filter_bakery": "Bakery",
   "filter_cafe": "Cafe",
-  "filter_market": "Market"
+  "filter_market": "Market",
+  "added_to_bag": "Added to bag successfully!",
+  "cannot_exceed_stock": "Cannot add more items than available in stock.",
+  "pickup": "Pick-Up",
+  "empty_favorites": "You don't have any favorites yet.",
+  "nav_home": "Home",
+  "nav_bag": "Bag",
+  "nav_profile": "Profile"
 }

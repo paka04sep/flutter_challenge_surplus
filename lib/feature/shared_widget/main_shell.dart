@@ -40,10 +40,10 @@ class MainShell extends StatelessWidget {
             }
           },
           destinations: [
-            const NavigationDestination(
-              icon: Icon(Icons.home_outlined),
-              selectedIcon: Icon(Icons.home),
-              label: 'Home',
+            NavigationDestination(
+              icon: const Icon(Icons.home_outlined),
+              selectedIcon: const Icon(Icons.home),
+              label: 'nav_home'.tr,
             ),
             NavigationDestination(
               icon: Badge(
@@ -52,12 +52,12 @@ class MainShell extends StatelessWidget {
                 child: const Icon(Icons.shopping_bag_outlined),
               ),
               selectedIcon: const Icon(Icons.shopping_bag),
-              label: 'Bag',
+              label: 'nav_bag'.tr,
             ),
-            const NavigationDestination(
-              icon: Icon(Icons.person_outline),
-              selectedIcon: Icon(Icons.person),
-              label: 'Profile',
+            NavigationDestination(
+              icon: const Icon(Icons.person_outline),
+              selectedIcon: const Icon(Icons.person),
+              label: 'nav_profile'.tr,
             ),
           ],
           indicatorColor: AppColors.primary.withValues(alpha: 0.15),
