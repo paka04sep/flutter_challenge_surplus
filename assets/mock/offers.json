@@ -1,0 +1,56 @@
+{
+  "offers": [
+    {
+      "id": "offer_1",
+      "title": "Surprise Bakery Box",
+      "store_name": "Green Loaf Bakery",
+      "category": "bakery",
+      "original_price": 350,
+      "discounted_price": 99,
+      "quantity_left": 4,
+      "image_url": "https://picsum.photos/seed/bakery1/400/300",
+      "pickup_window": "18:00 - 20:00",
+      "co2_kg": 1.2,
+      "is_favorite": false
+    },
+    {
+      "id": "offer_2",
+      "title": "Cafe Pastry Mix",
+      "store_name": "Bean & Crumb",
+      "category": "cafe",
+      "original_price": 280,
+      "discounted_price": 79,
+      "quantity_left": 6,
+      "image_url": "https://picsum.photos/seed/cafe1/400/300",
+      "pickup_window": "19:00 - 21:00",
+      "co2_kg": 0.8,
+      "is_favorite": true
+    },
+    {
+      "id": "offer_3",
+      "title": "Market Veggie Rescue",
+      "store_name": "Fresh Lane Market",
+      "category": "market",
+      "original_price": 420,
+      "discounted_price": 129,
+      "quantity_left": 2,
+      "image_url": "https://picsum.photos/seed/market1/400/300",
+      "pickup_window": "17:30 - 19:30",
+      "co2_kg": 2.1,
+      "is_favorite": false
+    },
+    {
+      "id": "offer_4",
+      "title": "Sourdough End-of-Day",
+      "store_name": "Green Loaf Bakery",
+      "category": "bakery",
+      "original_price": 220,
+      "discounted_price": 59,
+      "quantity_left": 8,
+      "image_url": "https://picsum.photos/seed/bakery2/400/300",
+      "pickup_window": "20:00 - 21:30",
+      "co2_kg": 0.5,
+      "is_favorite": false
+    }
+  ]
+}

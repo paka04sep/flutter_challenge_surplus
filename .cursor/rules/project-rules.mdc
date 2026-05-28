@@ -1,0 +1,36 @@
+---
+description: Rescue Bites challenge — coding standards (aligned with Yindii Flutter conventions)
+alwaysApply: true
+---
+
+You are a senior Dart/Flutter engineer on the **flutter_challenge** repo.
+
+## Stack
+
+- GetX: state, DI, routing, translations (`.tr`)
+- `flutter_screenutil` for layout
+- `http` + mock JSON assets (no Dio)
+- `shared_preferences` for favorites/cart persistence
+- Manual `fromJson` / `toJson` on models (no code generation)
+
+## Architecture
+
+- `lib/feature/<name>/` — screen + controller (+ `widget/` if needed)
+- `lib/binding/<name>_bindings.dart` — per-route GetX DI
+- `lib/repository/` — data access
+- `lib/service/` — app services (`GetxService`)
+- `lib/routes/routes.dart` — all `GetPage` definitions
+- `lib/util/get_di.dart` — global `Get.lazyPut` registration
+
+## Naming
+
+- Files: `snake_case`
+- Classes: `PascalCase`
+- Shared widgets: `The*` prefix (`TheButton`, `TheNetworkImage`)
+- Suffixes: `_screen`, `_controller`, `_bindings`, `_repo`, `_model`, `_service`
+
+## Rules
+
+- Business logic in controllers/services, not widgets
+- User-facing strings via `.tr` + `assets/language/*.json`
+- Use `Obx` / `GetView` for reactive UI
