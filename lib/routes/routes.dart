@@ -1,3 +1,4 @@
+import 'package:flutter_challenge/binding/offer_details_bindings.dart';
 import 'package:flutter_challenge/binding/cart_screen_bindings.dart';
 import 'package:flutter_challenge/binding/home_screen_bindings.dart';
 import 'package:flutter_challenge/binding/initial_loading_bindings.dart';
@@ -27,10 +28,10 @@ class Routes {
           page: () => const HomeScreen(),
           binding: HomeScreenBindings(),
         ),
-        // INTENTIONAL GAP (Task A2): Offer details route has no binding — candidate adds it.
         GetPage(
           name: offerDetails,
           page: () => const OfferDetailsScreen(),
+          binding: OfferDetailsBindings(),
         ),
         GetPage(
           name: cart,

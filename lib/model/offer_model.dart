@@ -60,7 +60,7 @@ class OfferModel {
       imageUrl: data['image_url'] as String,
       pickupWindow: data['pickup_window'] as String,
       // INTENTIONAL BUG (Task B1): API sends co2_kg but this reads wrong key.
-      co2Kg: (data['co2_saved_kg'] as num?)?.toDouble() ?? 0,
+      co2Kg: (data['co2_kg'] as num?)?.toDouble() ?? 0,
       isFavorite: data['is_favorite'] as bool? ?? false,
     );
   }

@@ -23,7 +23,8 @@ class OfferCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(16.r),
       child: Card(
         margin: EdgeInsets.only(bottom: 12.h),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -45,7 +46,8 @@ class OfferCard extends StatelessWidget {
                   top: 8.h,
                   left: 8.w,
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                     decoration: BoxDecoration(
                       color: AppColors.badgeDiscount,
                       borderRadius: BorderRadius.circular(8.r),
